@@ -1,0 +1,235 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block head%}
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.bucin{
+  margin:1rem;
+}
+</style>
+{%endblock%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%block content%}
+
+<div id="main">
+<section id="intro" class="main">
+  <div class="spotlight">
+    <div class="content">
+      <header class="major">
+        <h2>Freecodecamp - Arithmetic Formatter</h2>
+      </header>
+
+
+
+
+      <p> Below is an example of the first input parameter. It is a list of arithmetic problems each containing two operands with maximum four digits.
+      There can only be five problems at most and available operators are addition and subtraction.
+    The second parameter is a boolean value that decides whether results will be printed or not.</p>
+
+
+<div class="container bucin">
+
+  <textarea name="name" rows="8" cols="80" id="myInput" readonly>class meong1(Exception):
+      pass
+  class meong2(meong1):
+      pass
+  class meong3(meong1):
+      pass
+  class meong4(meong1):
+      pass
+  class meong5(meong1):
+      pass
+  num1=[]
+  num2=[]
+  num3=[]
+  def meong(a,b=False):
+      try:
+          for bubu in a:
+              a1=bubu.split()
+              num1.append(a1[0])
+              num2.append(a1[1])
+              num3.append(a1[2])
+          #error handling
+          if len(a)>5:
+              raise meong2
+          for mee in num2:
+              if mee!='+':
+                  if mee!='-':
+                      raise meong3
+          for mee in num1:
+              if mee.isnumeric()==False:
+                  raise meong4
+              if len(mee)>4:
+                  raise meong5
+          for mee in num3:
+              if mee.isnumeric()==False:
+                  raise meong4
+              if len(mee)>4:
+                  raise meong5
+          for bubu in num1:
+              print(f'{bubu:>6}',end='    ')
+          print(' ')
+          counter=0
+          for bubu in num3:
+              juju=f'{num2[counter]}{bubu:>5}'
+              print(juju,end='    ')
+              counter+=1
+          print(' ')
+          for bubu in range(len(num3)):
+              asli=''
+              max=0
+              if len(num1[bubu])>len(num3[bubu]) or len(num1[bubu])==len(num3[bubu]):
+                  max=len(num1[bubu])+2
+              else:
+                  max=len(num3[bubu])+2
+              asli='-'*max
+              print(f'{asli:>6}',end='    ')
+          print(' ')
+          if b:
+              counter=0
+              for bubu in num1:
+                  if num2[counter]=="+":
+                      print(f'{int(num1[counter])+int(num3[counter]):>6}',end='    ')
+                  elif num2[counter]=="-":
+                      print(f'{int(num1[counter])-int(num3[counter]):>6}',end='    ')
+                  counter+=1
+              print(' ')
+      except meong2:
+          print('Error: Too many problems.')
+      except meong3:
+          print("Error: Operator must be '+' or '-'.")
+      except meong4:
+          print('Error: Numbers must only contain digits.')
+      except meong5:
+          print('Error: Numbers cannot be more than four digits.')
+  meong(['1200 + 123','23 - 69','2433 + 69','2553 - 69','3223 - 69'],True)
+  </textarea>
+  <!-- <input type="text" value="meong(['1200 + 13','23 - 69','2433 + 69','2553 - 69','3223 - 69'],True)" id="myInput" readonly> -->
+  <div class="tooltip bucin">
+<button onclick="myFunction()" onmouseout="outFunc()">
+<span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+Copy
+</button>
+
+</div>
+
+</div>
+
+<hr>
+<p>This is a mini example that only accepts two integer numbers, operator used for calculation, and whether result will be printed or not with boolean value.</p>
+
+      <form class=""  method="POST">
+        {%csrf_token%}
+        <label for="first_param">First parameter:</label><br>
+          <input type="text" id="first_param" name="first_param" placeholder="ex : 23" required><br>
+          <label for="second_param">Second parameter:</label><br>
+
+          <input type="text" id="second_param" name="second_param" placeholder="ex : 25" required><br>
+
+          <!-- <input type="radio" id="True" name="bool_param" value="True">
+            <label for="True">True</label><br>
+            <input type="radio" id="False " name="bool_param" value="False">
+            <label for="True">False</label><br> -->
+
+            <input type="radio" id="addition" name="operator" value='+'>
+              <label for="addition">+</label>
+              <input type="radio" id="subtraction" name="operator" value='-' checked='checked' >
+              <label for="subtraction">-</label><br>
+              <input type="radio" id="False" name="bool_param" value='not_printed'>
+              <label for="False" >False</label>
+              <input type="radio" id="True" name="bool_param" value='printed' checked='checked' >
+              <label for="True">True</label><br>
+        <button type="submit" name="button">Submit</button>
+
+
+      </form>
+      <hr>
+      <h2>Result</h2>
+      <p>{{result}}</p>
+
+      <p>{{message}}</p>
+
+  </div>
+  </div>
+  </section>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+  function myFunction() {
+    var copyText = document.getElementById("myInput");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value);
+
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copied: " + copyText.value;
+  }
+
+  function outFunc() {
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copy to clipboard";
+  }
+  </script>
+{%endblock%}

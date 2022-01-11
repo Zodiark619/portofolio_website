@@ -18,5 +18,9 @@ from django.urls import path
 from meong1 import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index)
+    path('',views.index,name='index'),
+    path('portfolio/',views.portfolio,name='portfolio'),
+    path('portfolio/1/',views.portfolio1,name='portfolio1'),
+
+
 ]
