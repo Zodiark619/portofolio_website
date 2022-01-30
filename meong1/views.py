@@ -17,9 +17,14 @@ def portfolio1(request):
             if request.POST['operator']=='+':
                 result=input1+input2
                 context['result']=result
+                context['operator']=f"{input1} + {input2} = "
+                
             elif request.POST['operator']=='-':
                 result=input1-input2
                 context['result']=result
+                context['operator']=f"{input1} - {input2} = "
+
+
             if request.POST['bool_param']=='printed':
                 message='Result is printed!'
                 context['message']=message
