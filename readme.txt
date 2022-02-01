@@ -1,6 +1,7 @@
 Project name:meong (personal website deployed on pythonanywhere)
 Git:git remote add portofolio https://github.com/Zodiark619/portofolio_website.git
-Virtual Env:virtualenv-porto
+Virtual Env:..\env\virtualenv-porto\Scripts\activate
+
 
 Static:assets,images
 Template:base.html,index.html

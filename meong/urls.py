@@ -21,6 +21,8 @@ urlpatterns = [
     path('',views.index,name='index'),
 
     path('portfolio/',include('meong1.urls')),
+    path('django_rest/',include('meong2.urls')),
+
 
     # path('portfolio/',views.portfolio,name='portfolio'),
     # path('portfolio/1/',views.portfolio1,name='portfolio1'),

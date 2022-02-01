@@ -1,0 +1,122 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block head%}
+{%endblock%}
+{%block content%}
+<div id="main">
+<section id="intro" class="main">
+  <div class="spotlight">
+    <div class="content">
+        <header class="major">
+        <h2>Gwent Waifu API</h2>
+      </header>
+
+
+
+
+
+
+
+
+<p>This API contains four database models. Expansion, faction, and type are foreign keys used for waifu database model. Requests available in this API are GET and POST. Below listed all five available database object in JSON format with query "waifu.objects.all()[:5]".</p>
+
+<div class="container bucin">
+<textarea style="height:10rem;">
+  {%for a in waifus%}
+{{a}}
+{%endfor%}
+</textarea>
+</div>
+<br>
+<form method="POST">
+{%csrf_token%}
+<input type="radio" id="detail" name="request-type" value='detail-api'>
+<label for="detail">Get single object</label>
+<input type="radio" id="filter" name="request-type" value='filter-api' checked='checked' >
+<label for="filter">Filter objects</label><br>
+<button type="submit" name="command">Choose Command</button>
+</form>
+
+{%if command == True%}
+<form method="POST">
+  {%csrf_token%}
+  <label for="detail">Choose object ID:</label>
+  <select id="detail" name="detail">
+    {%for a in waifus%}
+    <option value="{{a.id}}">{{a.id}}</option>
+    {%endfor%}
+  </select>
+
+
+<button type="submit" name="detail-query" value="detail-query">Submit Query</button><hr>
+</form>
+
+
+
+
+
+{%elif command == False%}
+<hr>
+
+
+
+
+
+<form method="POST">
+  {%csrf_token%}
+<label for="expansions">Choose Expansion:</label>
+<select name="expansions" id="expansions">
+  {%for a in expansions%}
+  <option value="{{a.name}}">{{a.name}}</option>
+  {%endfor%}
+</select>
+<br>
+
+<label for="types">Choose Type:</label>
+<select name="types" id="types">
+  {%for a in types%}
+  <option value="{{a.name}}">{{a.name}}</option>
+  {%endfor%}
+</select>
+<br>
+
+
+<label for="factions">Choose Faction:</label>
+<select name="factions" id="factions">
+  {%for a in factions%}
+  <option value="{{a.name}}">{{a.name}}</option>
+  {%endfor%}
+</select>
+<br>
+<button type="submit" name="filter-query" value="filter-query">Submit Query</button><hr>
+</form>
+
+{%endif%}
+
+<br>
+<p>{{message}}</p>
+<br>
+<div class="container bucin">
+<h3>Result :</h3>
+{%if exist%}
+{{result}}
+{%else%}
+  {%for a in result%}
+{{a}}<br>
+{%endfor%}
+  {%endif%}
+</div>
+
+
+
+
+
+  </div>
+  </div>
+  </section>
+  </div>
+
+
+
+
+{%endblock%}
